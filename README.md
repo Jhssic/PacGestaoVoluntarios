@@ -27,12 +27,11 @@ Este projeto é uma aplicação web para a gestão de voluntários. A aplicaçã
    ```
 
 4. Importe o banco de dados MySQL:
-   - Execute o script `database.sql` para criar o banco de dados e as tabelas necessárias.
-
-## Configuração
-1. Configure as variáveis de ambiente:
-   - Renomeie o arquivo `.env.example` para `.env`.
-   - Preencha as variáveis de ambiente no arquivo `.env` com as informações do seu ambiente MySQL.
+   - Coloque o arquivo Voluntarios.sql na pasta Xampp em seu computador
+   - crie um novo banco de dados e saia usando quit
+   - escreva: mysql -u root nome-do-seu-banco < Voluntarios.sql (descompacta o bd)
+   - agora entre no banco de dados que você criou
+   
 
 ## Execução
 1. Inicie o servidor Node.js:
@@ -52,9 +51,3 @@ Contribuições são bem-vindas! Para contribuir com o projeto, siga as etapas a
 3. Faça o commit das suas alterações (`git commit -m 'Adicionando NovaFeature'`)
 4. Faça o push para a branch (`git push origin feature/NovaFeature`)
 5. Abra um Pull Request
-
-## Licença
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## Agradecimentos
-- 
