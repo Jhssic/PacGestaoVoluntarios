@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Voluntários</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Voluntários</h1>
+        <form action="/cadastrar-voluntario" method="post" class="row">  <div class="col-md-6 form-group"> <label for="nome">Nome Completo:</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome completo">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Digite seu telefone">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="cidade">Cidade:</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade">
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="dataNascimento" name="dataNascimento">
+            </div>
+            <div class="col-12">  <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
