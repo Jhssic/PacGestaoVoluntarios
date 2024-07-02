@@ -90,3 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCalendar();
 });
 //CALENDARIO FIM
+
+
+
+//Funçao de adicionar voluntatio ?
+    async function fetchVolunteers() {
+      const response = await fetch('http://localhost:3000/volunteers');
+      const volunteers = await response.json();
+      const tbody = document.getElementById('volunteers-list');
+      volunteers.forEach(volunteer => {
+        const row = `<tr>
+          <td>${volunteer.id}</td>
+          <td>${volunteer.name}</td>
+          <td>${volunteer.email}</td>
+          <td>${volunteer.phone}</td>
+          <td>${volunteer.city}</td>
+          <td>${volunteer.birthdate}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchVolunteers);

@@ -1,135 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <title>Gestão de Voluntários</title>
-
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Controle</title>
 </head>
-<body>
 
-  <style>
-    .Background {
-     background-image: url(imagens/bg.png);
-     color: #999191;
-     background-position: center; /* Centraliza a imagem no elemento */
-    }
+<body class="bg-light bac ">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-5 col-lg-2 d-md-block bg-white sidebar shadow-sm rounded vh-100 sidebar">
+        <div class="text-center py-4">
+          <img src="imagens/logoV.png" height="100px" alt="Logo">
+        </div>
+        <ul class="nav flex-column text-center ">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <img src="imagens/home.png" alt="Home" class="nav-icon icon-sm">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-map"></i>
+              Estados
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-calendar-alt"></i>
+              Agenda
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-clipboard-list"></i>
+              Inscrições
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-chart-bar"></i>
+              Gráficos
+            </a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a class="nav-link" href="#">
+              <i class="fas fa-user"></i>
+              Conta
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 150px; /* Largura da navbar */
-      background-color: rgba(255, 255, 255, 0.8); /* Cor com transparência */
-      backdrop-filter: blur(10px); /* Efeito de desfoque para simular vidro */
-      padding: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      padding: 10px 0; /* Espaçamento interno */
-      border-radius: 20px 20px 20px 20px; /* Borda arredondada à esquerda */
-      margin-left: 50px;
-      margin-bottom: 15px;
-      margin-top: 15px;
+      <!-- Main content -->
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-4 vh-100 d-inline-block Background ">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
+          <h1 class="h2 text-light">Voluntários</h1>
+        </div>
 
-    }
-    .navbar-brand {
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 550px; /* Espaçamento inferior da logo */
-    }
-    .navbar-nav {
-      flex-direction: column; /* Alinha os itens na vertical */
-    }
-    .nav-link {
-      text-align: center;
-      padding: 10px 0;
-    }
-    .navbar-nav .active {
-      background-color: "bg.png"; /* Cor de fundo do item ativo */
-      border-radius: 10px; /* Borda arredondada do item ativo */ 
-    }
-
-    .container-custom {
-      margin: 20px auto; /* Margem interna e centralização */
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.9); /* Cor com transparência */
-      backdrop-filter: blur(10px); /* Efeito de desfoque para simular vidro */
-      border-radius: 20px; /* Cantos arredondados */
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      margin-left: 15px;
-      width:1200px ;
-      height: 662px;
-    }
-    
-  </style>
-</head>
-<body class="Background">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
-      <img src="imagens/logoV.png" height="100" alt="Logo"> <!-- Substitua pelo caminho da sua logo -->
-    </a>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#"><i class="fas fa-home"></i></a> <!-- Ícone de home -->
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-user"></i></a> <!-- Ícone de usuário -->
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-cog"></i></a> <!-- Ícone de configurações -->
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Conteúdo principal -->
-  <div class="container-fluid ml-5"> <!-- Espaço para o conteúdo principal -->
-    <!-- Seu conteúdo aqui -->
+        <div class="table-responsive ">
+          <table class="table table-striped table-hover text-light">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Cidade</th>
+                <th>Data de Nascimento</th>
+              </tr>
+            </thead>
+            <tbody id="volunteers-list">
+              <!-- Voluntários serão inseridos aqui -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
   </div>
 
-  <div class="container">
-    <div class="container-custom">
-    
-    <h1>Voluntários</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Telefone</th>
-          <th>Cidade</th>
-          <th>Data de Nascimento</th>
-        </tr>
-      </thead>
-      <tbody id="volunteers-list">
-        <!-- Voluntários serão inseridos aqui -->
-      </tbody>
-    </table>
-  </div>
-
-
-
-  <script>
-    async function fetchVolunteers() {
-      const response = await fetch('http://localhost:3000/volunteers');
-      const volunteers = await response.json();
-      const tbody = document.getElementById('volunteers-list');
-      volunteers.forEach(volunteer => {
-        const row = `<tr>
-          <td>${volunteer.id}</td>
-          <td>${volunteer.name}</td>
-          <td>${volunteer.email}</td>
-          <td>${volunteer.phone}</td>
-          <td>${volunteer.city}</td>
-          <td>${volunteer.birthdate}</td>
-        </tr>`;
-        tbody.innerHTML += row;
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', fetchVolunteers);
-  </script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
-</html>
+</html>    
