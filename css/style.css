@@ -3,7 +3,7 @@
     background-color: #d7b4ec;
     /*background-color: rgba(255, 255, 255, 0.9); /* Cor com transparência */
     backdrop-filter: blur(10px); /* Efeito de desfoque para simular vidro */
-    border-radius: 10px; /* Bordas arredondadas */
+    border-radius: 10px 0px 10px 0px; /* Bordas arredondadas */
     min-height: 100vh; /* Altura mínima igual à altura da viewport */
     
    }
@@ -22,7 +22,7 @@
   
 
 .nav-link {
-    color: #d7b4ec; /* Cor normal dos links */
+    color: #b576d9; /* Cor normal dos links */
 }
 
 /* Cor dos links quando hover na navbar */
@@ -35,5 +35,10 @@
     height: auto; /* Altura automática para manter a proporção */
     margin-right: 8px; /* Espaçamento entre a imagem e o texto */
     vertical-align: middle; /* Alinha verticalmente com o texto */
+    color:#b576d9;
   }
   
+
+.conta {
+    margin-top: 100px;
+  }
