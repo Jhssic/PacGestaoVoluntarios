@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
-const volunteerController = require('../controllers/voluntarioController');
 
-router.get('/volunteers', volunteerController.getAllVolunteers);
-router.post('/volunteers', volunteerController.createVolunteer);
+router.get('/', (req, res) => {
+  res.send('partials/controleVoluntario');
+});
 
-module.exports = router;
+export default router;
