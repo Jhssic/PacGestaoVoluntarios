@@ -3,9 +3,9 @@ import voluntarioRoutes from './voluntarioRoutes.js';
 
 const router = express.Router();
 
-// Exemplo de rota para renderizar a página de login
+// rota login
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('partials/login');
 });
 
 // Rota Agenda
@@ -33,7 +33,7 @@ router.get('/experiencias', (req, res) => {
     res.render('partials/experiencias');
   });
 
-// Rota gra
+// Rota graficos
 router.get('/graficos', (req, res) => {
     res.render('partials/graficos');
   });
@@ -47,11 +47,6 @@ router.get('/eventos', (req, res) => {
 router.get('/home', (req, res) => {
   res.render('partials/home');
 });
-
-// Rota Eventos
-router.get('/eventos', (req, res) => {
-    res.render('partials/eventos');
-  });
 
 // Rota Voluntarios ADM
 router.get('/voluntarios', (req, res) => {
