@@ -53,7 +53,8 @@ router.get('/voluntarios', (req, res) => {
     res.render('partials/controleVoluntario');
   });
 
-router.use('/voluntarios', voluntarioRoutes);
+// Rota perfil do voluntário
+//router.get('/perfil/:id', VoluntarioController.getPerfil);
 
 
 export default router;

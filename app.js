@@ -22,7 +22,29 @@ app.use(express.urlencoded({ extended: true }));
 // Rotas
 app.use('/', routes);
 
-// Iniciar o servidor
+app.get('/perfil/:id', async (req, res) => {
+  const voluntarioId = req.params.id;
+
+  try {
+      const voluntario = await Voluntario.findByPk(voluntarioId);
+
+      if (!voluntario) {
+          return res.status(404).send('Voluntário não encontrado.');
+      }
+
+      const eventosInscritos = await voluntario.getEventosInscritos();
+
+      // Renderiza a página do perfil do voluntário, passando eventosInscritos para o template
+      res.render('perfil', { voluntario, eventosInscritos });
+
+  } catch (error) {
+      console.error('Erro ao carregar perfil do voluntário:', error);
+      res.status(500).send('Erro interno ao carregar perfil do voluntário.');
+  }
+});
+
+
+// Inicia o servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
