@@ -1,0 +1,24 @@
+{
+    "development": {
+      "username": "jhess",
+      "password": "Jhessica0@",
+      "database": "gestvoluntarios",
+      "host": "200.147.61.78",
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "jhess",
+      "password": "Jhessica0@",
+      "database": "gestvoluntarios",
+      "host": "200.147.61.78",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "jhess",
+      "password": "Jhessica0@",
+      "database": "gestvoluntarios",
+      "host": "200.147.61.78",
+      "dialect": "mysql"
+    }
+  }
+  

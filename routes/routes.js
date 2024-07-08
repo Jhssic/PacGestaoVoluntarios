@@ -44,7 +44,7 @@ router.get('/eventos', (req, res) => {
   });
 
 // Rota home
-router.get('/home', (req, res) => {
+router.get('/home', isAuthenticated, (req, res) => {
   res.render('partials/home');
 });
 
@@ -54,7 +54,18 @@ router.get('/voluntarios', (req, res) => {
   });
 
 
+function isAuthenticated(req, res, next) {
+    if (req.session?.token) {
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
+/*router.get('/protected', authMiddleware, (req, res) => {
+    res.send('Você está autenticado!!!!!!!!');
+});
+*/
 // Rota perfil do voluntário
 //router.get('/perfil/:id', VoluntarioController.getPerfil);
 

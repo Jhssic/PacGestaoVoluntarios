@@ -2,8 +2,15 @@
 
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
+import Voluntario from './voluntario.js'; 
+import Evento from './evento.js'; 
 
 const Participacao = sequelize.define('Participacao', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },   
     voluntario_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -18,7 +25,7 @@ const Participacao = sequelize.define('Participacao', {
     },
 });
 
-Participacao.belongsTo(Voluntario, { foreignKey: 'voluntario_id' });
+//Participacao.belongsTo(Voluntario, { foreignKey: 'voluntario_id' });
 Participacao.belongsTo(Evento, { foreignKey: 'evento_id' });
 
 

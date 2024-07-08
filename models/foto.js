@@ -5,6 +5,11 @@ import sequelize from '../config/database.js';
 import Postagem from './postagem';
 
 const Foto = sequelize.define('Foto', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
     postagem_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
