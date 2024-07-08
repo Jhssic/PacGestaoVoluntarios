@@ -1,5 +1,6 @@
 import express from 'express';
 import voluntarioRoutes from './voluntarioRoutes.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get('/login', (req, res) => {
 });
 
 // Rota Agenda
-router.get('/agenda', (req, res) => {
+router.get('/agenda',isAuthenticated, (req, res) => {
     res.render('partials/agenda');
   });
 
@@ -19,27 +20,27 @@ router.get('/cadastro', (req, res) => {
   });
 
 // Rota conta
-router.get('/conta', (req, res) => {
+router.get('/conta',isAuthenticated, (req, res) => {
     res.render('partials/conta');
   });
 
 // Rota Eventos
-router.get('/eventos', (req, res) => {
+router.get('/eventos', isAuthenticated, (req, res) => {
     res.render('partials/eventos');
   });
 
 // Rota experiencias
-router.get('/experiencias', (req, res) => {
+router.get('/experiencias',isAuthenticated, (req, res) => {
     res.render('partials/experiencias');
   });
 
 // Rota graficos
-router.get('/graficos', (req, res) => {
+router.get('/graficos', isAuthenticated, (req, res) => {
     res.render('partials/graficos');
   });
 
 // Rota Eventos
-router.get('/eventos', (req, res) => {
+router.get('/eventos', isAuthenticated, (req, res) => {
     res.render('partials/eventos');
   });
 
@@ -56,7 +57,12 @@ router.get('/voluntarios', (req, res) => {
 
 function isAuthenticated(req, res, next) {
     if (req.session?.token) {
-        return next();
+      try {
+        jwt.verify(req.session?.token, process.env.JWT_SECRET);
+        next();
+      } catch (err) {
+        res.redirect('/login');
+      }
     } else {
         res.redirect('/login');
     }
