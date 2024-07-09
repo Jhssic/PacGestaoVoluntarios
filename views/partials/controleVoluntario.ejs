@@ -70,12 +70,27 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
-                <th>Cidade</th>
                 <th>Data de Nascimento</th>
+                <th>Endereço</th>
+                <th>Data de Criação</th>
+                <th>Senha</th>
+                <th>É administrador ?</th>
               </tr>
             </thead>
             <tbody id="volunteers-list">
-              <!-- Voluntários serão inseridos aqui -->
+              <% voluntarios.forEach(voluntario => { %>
+                <tr>
+                  <td><%= voluntario.id %></td>
+                  <td><%= voluntario.nome %></td>
+                  <td><%= voluntario.email %></td>
+                  <td><%= voluntario.telefone %></td>
+                  <td><%= voluntario.dataDeNascimento %></td>
+                  <td><%= voluntario.endereco %></td>
+                  <td><%= voluntario.dataCriacao %></td>
+                  <td><%= voluntario.senha %></td>
+                  <td><%= voluntario.isAdmin %></td>
+                </tr>
+              <% }); %>
             </tbody>
           </table>
         </div>

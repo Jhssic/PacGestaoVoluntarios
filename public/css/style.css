@@ -739,3 +739,27 @@ table.fc-header{
     padding-right: 10px;
 }
 
+/*Modal eventos*/
+.fixed-bottom-right {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 1000;
+  }
+.event-box {
+	background-color: #f8f9fa;
+	border: 1px solid #dee2e6;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px 0;
+  }
+
+  /* Ajuste os z-indexes para garantir que os formulários sejam clicáveis */
+.modal-backdrop {
+	z-index: 1040 !important;
+  }
+  
+  .modal {
+	z-index: 1050 !important;
+  }
+  

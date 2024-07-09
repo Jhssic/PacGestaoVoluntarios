@@ -1,9 +1,10 @@
 import express from 'express';
-import voluntarioRoutes from './voluntarioRoutes.js';
 import jwt from 'jsonwebtoken';
+import Evento from '../models/evento.js';
+import authMiddleware from '../middlewares/auth.js';
+import Voluntario from '../models/voluntario.js';
 
 const router = express.Router();
-
 // rota login
 router.get('/login', (req, res) => {
   res.render('partials/login');
@@ -68,12 +69,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-/*router.get('/protected', authMiddleware, (req, res) => {
-    res.send('Você está autenticado!!!!!!!!');
-});
-*/
-// Rota perfil do voluntário
-//router.get('/perfil/:id', VoluntarioController.getPerfil);
+
 
 
 export default router;
