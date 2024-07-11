@@ -35,6 +35,10 @@ const Voluntario = sequelize.define('Voluntario', {
       type: DataTypes.STRING,
       allowNull: false
     },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false 
+    }
 }, {
     tableName: 'voluntarios', // Nome da tabela no banco de dados
     timestamps: false, // Habilita automaticamente os campos createdAt e updatedAt

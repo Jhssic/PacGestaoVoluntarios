@@ -347,6 +347,44 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/locale/pt-br.js"></script>
 
 
+        // Função para envio do formulário do modal e atualização do calendário
+        <script>
+          $('#formEvento').submit(function(e) {
+            e.preventDefault();
+            
+            // Captura dos dados do formulário
+            const titulo = $('#titulo').val();
+            const descricao = $('#descricao').val();
+            const dataInicio = $('#dataInicio').val();
+            const dataFim = $('#dataFim').val();
+            
+            // AJAX para enviar os dados para o backend
+            $.ajax({
+              type: 'POST',
+              url: '/salvarEvento',
+              data: {
+                titulo,
+                descricao,
+                dataInicio,
+                dataFim
+              },
+              success: function(response) {
+                const novoEvento = response.novoEvento;
+                // Exibir o evento na página
+                exibirEventoNaPagina(novoEvento);
+                // Atualizar o calendário (reiniciar o calendário ou atualizar dinamicamente)
+                $('#calendar').fullCalendar('refetchEvents');
+                // Fechar o modal após salvar
+                $('#modalEvento').modal('hide');
+              },
+              error: function(error) {
+                console.error('Erro ao salvar evento:', error);
+                // Lógica para exibir mensagem de erro ao usuário, se necessário
+              }
+            });
+          });
+          </script>
+
       </main>
     </div>
   </div>

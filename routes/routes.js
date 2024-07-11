@@ -7,6 +7,7 @@ import Voluntario from '../models/voluntario.js';
 const router = express.Router();
 // rota login
 router.get('/login', (req, res) => {
+  console.log("ola")
   res.render('partials/login');
 });
 
@@ -27,7 +28,8 @@ router.get('/conta',isAuthenticated, (req, res) => {
 
 // Rota Eventos
 router.get('/eventos', isAuthenticated, (req, res) => {
-    res.render('partials/eventos');
+    console.log(req.session)
+    res.render('partials/eventos',{ isAdmin: req.session.isAdmin });
   });
 
 // Rota experiencias
@@ -41,9 +43,7 @@ router.get('/graficos', isAuthenticated, (req, res) => {
   });
 
 // Rota Eventos
-router.get('/eventos', isAuthenticated, (req, res) => {
-    res.render('partials/eventos');
-  });
+
 
 // Rota home
 router.get('/home', isAuthenticated, (req, res) => {
@@ -55,6 +55,29 @@ router.get('/voluntarios', (req, res) => {
     res.render('partials/controleVoluntario');
   });
 
+router.get('/partials/login', (req, res) => {
+    res.render('partials/login');
+  });
+
+
+router.post('/evento/criar', async (req, res) => {
+    const { nome, descricao, data, local } = req.body;
+    try {
+      // Cria um novo evento no banco de dados usando o modelo Evento
+      const novoEvento = await Evento.create({
+        nome,
+        descricao,
+        data,
+        local
+      });
+  
+      // Retorna uma resposta JSON indicando sucesso e o evento criado
+      res.status(201).json({ message: 'Evento criado com sucesso', evento: novoEvento });
+    } catch (error) {
+      console.error('Erro ao criar evento:', error);
+      res.status(500).json({ error: 'Erro ao criar evento' });
+    }
+  });
 
 function isAuthenticated(req, res, next) {
     if (req.session?.token) {
@@ -68,8 +91,6 @@ function isAuthenticated(req, res, next) {
         res.redirect('/login');
     }
 }
-
-
 
 
 export default router;

@@ -13,7 +13,19 @@ const authController = {
       }
       const token = jwt.sign({ userId: voluntario.id }, process.env.JWT_SECRET, { expiresIn: 500 });
       req.session.token = token
+      req.session.isAdmin = voluntario.isAdmin
+      console.log(voluntario)
       res.json({ token });
+    } catch (err) {
+        console.log(err)
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+logout: async (req, res) => {
+    try {
+      req.session.destroy()
+      res.redirect('/partials/login')
     } catch (err) {
         console.log(err)
       res.status(500).json({ error: err.message });

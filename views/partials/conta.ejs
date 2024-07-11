@@ -93,8 +93,8 @@
                       </div>
                       <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Salvar Alterações</button></div>
                       <!-- Botão para sair da conta -->
-                  <div action="/logout" method="POST">
-                    <button type="submit" class="btn btn-danger">Sair da Conta</button required>
+                  <div>
+                    <button onclick="logout()" class="btn btn-danger">Sair da Conta</button required>
                   </div>
                   </div>
               </div>
@@ -105,7 +105,21 @@
       </main>
     </div>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+     function logout() {
+      axios.post('/auth/logout')
+        .then(response => {
+          // Remover o token JWT do armazenamento local
+          localStorage.removeItem('token');
+          // Redirecionar para a página de login
+          window.location.href = '/login';
+        })
+        .catch(error => {
+          console.error('Erro ao fazer logout:', error);
+        });
+    }
+  </script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>    

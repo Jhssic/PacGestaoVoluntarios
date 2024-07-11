@@ -43,7 +43,10 @@ app.use('/', routes);
 app.use('/auth', cadastroLoginRoutes);
 app.use('/auth', loginRoutes);
 
-
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
 
 app.get('/perfil/:id', async (req, res) => {
   const voluntarioId = req.params.id;
@@ -88,14 +91,36 @@ app.post('/cadastro', async (req, res) => {
   }
 });
 
-/*sequelize.sync({ force: false }) // Se force for true, ele irá apagar e recriar as tabelas
-  .then(() => {
-    console.log('Modelos sincronizados com o banco de dados.');
-  })
-  .catch(err => {
-    console.error('Erro ao sincronizar modelos:', err);
+
+// rota de logout 
+app.post('/auth/logout', (req, res) => {
+  req.session.destroy(err => {
+      if (err) {
+          return res.status(500).send('Não foi possível encerrar a sessão.');
+      }
+      res.clearCookie('connect.sid'); // Limpa o cookie da sessão
+      res.redirect('/login'); // Redireciona para a página de login
   });
-*/
+  res.status(200).send('Logout realizado com sucesso.');
+});
+
+
+app.post('/salvarEvento', async (req, res) => {
+  try {
+    const { nome, descricao, data, local } = req.body; 
+    const novoEvento = await Evento.create({
+      nome,
+      descricao,
+      data,
+      local
+    });
+    res.status(201).json({ novoEvento });
+  } catch (error) {
+    console.error('Erro ao salvar evento:', error);
+    res.status(500).json({ error: 'Erro ao salvar evento' });
+  }
+});
+
 
 // Inicia o servidor
 const PORT = process.env.PORT || 3001;
