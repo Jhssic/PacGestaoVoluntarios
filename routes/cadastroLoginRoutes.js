@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 // Rota para processar o cadastro de usuário
 router.post('/cadastro', (req, res) => {
-  const { nome,sobrenome, email, senha, dataCriacao, endereco, data_nascimento,telefone } = req.body;
+  const { nome,sobrenome, email, senha, dataCriacao, endereco, data_nascimento,telefone, profissao } = req.body;
 
   // Crie um novo usuário no banco de dados
   Voluntario.create({
@@ -21,7 +21,8 @@ router.post('/cadastro', (req, res) => {
       telefone:telefone,
       data_criacao: dataCriacao,
       endereco: endereco,
-      data_nascimento: data_nascimento
+      data_nascimento: data_nascimento,
+      profissao: profissao
       // Adicione outros campos conforme necessário
   })
   .then(usuario => {
@@ -32,6 +33,38 @@ router.post('/cadastro', (req, res) => {
   });
 });
 
+router.put('/AtualizarVoluntario/:id_voluntario', authMiddleware, async (req, res) => {
+    let id_voluntario = req.params.id_voluntario;
+
+    try{
+        await Voluntario.update(req.body, {
+            where: {
+                id: id_voluntario
+            }
+        })
+        
+        res.status(201).json();
+    }
+    catch (e){
+        console.log(e)
+    }
+});
+
+
+router.get('/BuscarVoluntarioPorId/:id_voluntario', authMiddleware, async (req, res) => {
+    let id_voluntario = req.params.id_voluntario;
+    console.log(id_voluntario)
+
+    try{
+        let vol = await Voluntario.findByPk(id_voluntario)
+        
+        console.log(vol)
+        res.status(201).json(vol);
+    }
+    catch (e){
+        console.log(e)
+    }
+});
 
 router.post('/', authMiddleware, (req, res) => {
     res.status(200).json(

@@ -43,6 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', routes);
 app.use('/auth', cadastroLoginRoutes);
 app.use('/auth', loginRoutes);
+app.use('/eventos', eventosRoutes)
 
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store');
@@ -135,6 +136,10 @@ app.post('/evento/criar', async (req, res) => {
     console.error("Erro ao criar evento:", error);
     res.status(500).send("Erro ao criar evento");
   }
+});
+
+app.get('*', (req, res) => {
+  res.render('partials/login')
 });
 
 // Inicia o servidor

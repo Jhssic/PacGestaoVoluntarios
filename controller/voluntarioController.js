@@ -35,4 +35,20 @@ exports.updateVolunteer = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to update volunteer' });
   }
+
+  exports.getById = async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      const vol = await Voluntario.findByPk(userId);
+  
+      if (!vol) {
+        return res.status(403).json({ error: 'Volunteer not found' });
+      }
+      
+      res.status(200).json(vol);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update volunteer' });
+    }
+  }
 };

@@ -2,7 +2,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const Evento = sequelize.define('Evento', {
+const Evento = sequelize.define('Eventos', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,7 +20,11 @@ const Evento = sequelize.define('Evento', {
     },
     local: {
         type: DataTypes.STRING(255),
-    },
+    }
+}, 
+{
+    tableName: 'eventos',
+    timestamps: false
 });
 
 export default Evento;

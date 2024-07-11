@@ -18,10 +18,4 @@ router.post('/criar', async (req, res) => {
     res.status(500).send("Erro ao criar evento");
   }
 });
-
-router.get('/eventos', authMiddleware, (req, res) => {
-  // Renderiza a página eventos e passa isAdmin apenas se for administrador
-  res.render('eventos', { isAdmin: req.session.isAdmin });
-});
-
 export default router;

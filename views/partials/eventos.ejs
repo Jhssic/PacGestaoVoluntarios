@@ -38,6 +38,49 @@
     .modal {
       z-index: 1050 !important;
     }
+
+    #eventsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+  .hidden {
+      display: none;
+  }
+
+.card {
+    width: 80%;  /* Ajuste a largura conforme necessário */
+    max-width: 600px;  /* Limite máximo de largura */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+        font-size: 1rem;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 0.875rem;
+        margin-bottom: 10px;
+    }
   </style>
 </head>
 
@@ -92,7 +135,7 @@
       </nav>
 
       <div class="fixed-bottom-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModalAdmin">
+        <button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" data-target="#eventModalAdmin" id="createEventButton">
           Criar Evento
         </button>
       </div>
@@ -138,7 +181,22 @@
       <main class="col-md-9 ml-sm-auto col-lg-10 px-4 vh-100 d-inline-block Background">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 text-light">Eventos</h1>
-          <div id="eventsContainer"></div>
+        </div>
+        <div id="eventsContainer">
+          <% if (eventos && eventos.length) { %>
+            <% eventos.forEach(function(evento) { %>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= evento.nome %></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><%= evento.local %></h6>
+                  <p class="card-text"><%= evento.descricao %></p>
+                  <p class="card-text"><small class="text-muted"><%= evento.data %></small></p>
+                </div>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <p>Nenhum evento disponível.</p>
+          <% } %>
         </div>
       </main>
     </div>
@@ -146,6 +204,12 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      const isAdmin = <%= isAdmin %>;
+
+      if (isAdmin) {
+        document.getElementById('createEventButton').style.display = 'block';
+      }
+
       const salvarEventoBtn = document.getElementById('saveEventButton');
       const formEvento = document.getElementById('formEvento');
 
@@ -160,10 +224,6 @@
           descricao: eventDescription,
           data: eventDate,
           local: eventLocation
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
         })
         .then(response => {
           console.log('Evento criado com sucesso:', response.data);
@@ -176,6 +236,10 @@
           });
           // Fechar o modal após salvar
           $('#eventModalAdmin').modal('hide');
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
         })
         .catch(error => {
           console.error('Erro ao criar evento:', error);

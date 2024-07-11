@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import Evento from '../models/evento.js';
 import authMiddleware from '../middlewares/auth.js';
 import Voluntario from '../models/voluntario.js';
+import { jwtDecode } from 'jwt-decode';
 
 const router = express.Router();
 // rota login
@@ -23,13 +24,13 @@ router.get('/cadastro', (req, res) => {
 
 // Rota conta
 router.get('/conta',isAuthenticated, (req, res) => {
-    res.render('partials/conta');
+    res.render('partials/conta', { userId: jwtDecode(req.session.token).userId });
   });
 
 // Rota Eventos
-router.get('/eventos', isAuthenticated, (req, res) => {
+router.get('/eventos', isAuthenticated, async (req, res) => {
     console.log(req.session)
-    res.render('partials/eventos',{ isAdmin: req.session.isAdmin });
+    res.render('partials/eventos',{ isAdmin: req.session.isAdmin, eventos: await Evento.findAll() });
   });
 
 // Rota experiencias

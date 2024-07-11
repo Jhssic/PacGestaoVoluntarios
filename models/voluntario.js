@@ -21,6 +21,10 @@ const Voluntario = sequelize.define('Voluntario', {
     telefone: {
         type: DataTypes.STRING(20),
     },
+    profissao: {
+        type: DataTypes.STRING(200),
+        allowNull: true,
+    },
     data_nascimento: {
         type: DataTypes.DATE,
     },
