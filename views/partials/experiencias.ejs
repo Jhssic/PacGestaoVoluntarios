@@ -6,9 +6,36 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <title>Controle</title>
+  <style>
+    .evento {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .fixed-bottom-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .event-box {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .modal-backdrop {
+      z-index: 1040 !important;
+    }
+    .modal {
+      z-index: 1050 !important;
+    }
+  </style>
 </head>
-
-<body class="bg-light bac ">
+<body class="bg-light bac">
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
@@ -56,15 +83,105 @@
         </ul>
       </nav>
 
+      <!-- Botão fixo para criar postagem -->
+      <div class="fixed-bottom-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModalAdmin">
+          Criar Postagem
+        </button>
+      </div>
+
+      <!-- Modal para criar postagem -->
+      <div class="modal fade" id="eventModalAdmin" tabindex="-1" role="dialog" aria-labelledby="eventModalAdminLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="eventModalAdminLabel">Criar Postagem</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="formEvento">
+                <div class="form-group">
+                  <label for="eventName" class="col-form-label">Titulo:</label>
+                  <input type="text" class="form-control" id="eventName" placeholder="Titulo do Evento">
+                </div>
+                <div class="form-group">
+                  <label for="eventDescription" class="col-form-label">Descrição:</label>
+                  <textarea class="form-control" id="eventDescription" placeholder="Descrição do Evento"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="eventDate" class="col-form-label">Data:</label>
+                  <input type="date" class="form-control" id="eventDate">
+                </div>
+                <div class="form-group">
+                  <label for="eventLocation" class="col-form-label">Local:</label>
+                  <input type="text" class="form-control" id="eventLocation" placeholder="Digite o Local do Evento">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary" id="saveEventButton">Salvar Evento</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Main content -->
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-4 vh-100 d-inline-block Background ">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-4 vh-100 d-inline-block Background">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 text-light">Experiências</h1>
         </div>
       </main>
     </div>
   </div>
+  <!-- Inclusão dos scripts necessários do Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const salvarEventoBtn = document.getElementById('saveEventButton');
+      const formEvento = document.getElementById('formEvento');
 
+      salvarEventoBtn.addEventListener('click', function () {
+        const eventName = document.getElementById('eventName').value;
+        const eventDescription = document.getElementById('eventDescription').value;
+        const eventDate = document.getElementById('eventDate').value;
+        const eventLocation = document.getElementById('eventLocation').value;
+
+        axios.post('/evento/criar', {
+          nome: eventName,
+          descricao: eventDescription,
+          data: eventDate,
+          local: eventLocation
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        .then(response => {
+          console.log('Evento criado com sucesso:', response.data);
+          Swal.fire({
+            icon: 'success',
+            title: 'Evento Criado',
+            text: 'O evento foi criado com sucesso.',
+          });
+          $('#eventModalAdmin').modal('hide');
+        })
+        .catch(error => {
+          console.error('Erro ao criar evento:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro ao criar evento',
+            text: 'Ocorreu um erro ao tentar criar o evento. Por favor, tente novamente.',
+          });
+        });
+      });
+    });
+  </script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
-</html>    
+</html>

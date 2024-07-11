@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 import routes from './routes/routes.js';
 import Voluntario from './models/voluntario.js';
-import Participacao from './models/participacao.js';
+import eventosRoutes from './routes/eventosRoutes.js';
+import Evento from './models/evento.js';
 import session from 'express-session';
 // Importar as rotas de cadastro e login
 import cadastroLoginRoutes from './routes/cadastroLoginRoutes.js';
@@ -121,6 +122,20 @@ app.post('/salvarEvento', async (req, res) => {
   }
 });
 
+app.post('/evento/criar', async (req, res) => {
+  try {
+    const evento = await Evento.create({
+      nome: req.body.nome,
+      descricao: req.body.descricao,
+      data: req.body.data,
+      local: req.body.local,
+    });
+    res.status(201).send(evento);
+  } catch (error) {
+    console.error("Erro ao criar evento:", error);
+    res.status(500).send("Erro ao criar evento");
+  }
+});
 
 // Inicia o servidor
 const PORT = process.env.PORT || 3001;

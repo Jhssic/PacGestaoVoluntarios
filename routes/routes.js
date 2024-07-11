@@ -59,25 +59,22 @@ router.get('/partials/login', (req, res) => {
     res.render('partials/login');
   });
 
-
-router.post('/evento/criar', async (req, res) => {
-    const { nome, descricao, data, local } = req.body;
-    try {
-      // Cria um novo evento no banco de dados usando o modelo Evento
-      const novoEvento = await Evento.create({
-        nome,
-        descricao,
-        data,
-        local
-      });
-  
-      // Retorna uma resposta JSON indicando sucesso e o evento criado
-      res.status(201).json({ message: 'Evento criado com sucesso', evento: novoEvento });
-    } catch (error) {
-      console.error('Erro ao criar evento:', error);
-      res.status(500).json({ error: 'Erro ao criar evento' });
-    }
+//já está em eventosRoutes
+/*router.post('/evento/criar', async (req, res) => {
+  try {
+    const evento = await Evento.create({
+      nome: req.body.nome,
+      descricao: req.body.descricao,
+      data: req.body.data,
+      local: req.body.local,
+    });
+    res.status(201).send(evento);
+  } catch (error) {
+    console.error("Erro ao criar evento:", error);
+    res.status(500).send("Erro ao criar evento");
+  }
   });
+*/
 
 function isAuthenticated(req, res, next) {
     if (req.session?.token) {
