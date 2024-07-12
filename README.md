@@ -1,13 +1,8 @@
 # Projeto de Gestão de Voluntários
 Este projeto é uma aplicação web para a gestão de voluntários. A aplicação permite o cadastro de voluntários, gerenciamento de eventos e vinculação de voluntários aos eventos. Utiliza Node.js para o backend e MySQL para o banco de dados.
 
-## Autores
-- Jhessica Maria Alves Fernandes - Engenharia de Software - 3B
-
 ## Pré-requisitos
 - Node.js instalado
-- MySQL instalado e em execução (utilizei o Xampp)
-- Insomnia (ou outro cliente REST API) instalado (opcional)
 
 ## Instalação
 1. Clone o repositório para o seu ambiente local:
@@ -24,24 +19,14 @@ Este projeto é uma aplicação web para a gestão de voluntários. A aplicaçã
    ```bash
    npm install
    ```
-
-4. Importe o banco de dados MySQL:
-   - Coloque o arquivo Voluntarios.sql na pasta Xampp em seu computador
-   - crie um novo banco de dados e saia usando quit
-   - escreva: mysql -u root nome-do-seu-banco < Voluntarios.sql (descompacta o bd)
-   - agora entre no banco de dados que você criou
    
-
 ## Execução
 1. Inicie o servidor Node.js:
    ```bash
-   npm start
+   npm app.js
    ```
 
-2. O servidor estará em execução em `http://localhost:3000`.
-
-## Uso
-1. Utilize o Insomnia (ou outro cliente REST API) para enviar solicitações HTTP para o servidor em `http://localhost:3000`.
+2. O servidor estará em execução em `http://localhost:3001`.
 
 ## Contribuição
 Contribuições são bem-vindas! Para contribuir com o projeto, siga as etapas abaixo:
